@@ -1,0 +1,243 @@
+.learning-path-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header h2 {
+  color: #1f2937;
+  font-size: clamp(20px, 4vw, 28px); /* Responsive font size */
+  font-weight: 700;
+  margin: 0;
+}
+
+.legend {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: clamp(12px, 2.5vw, 14px); /* Responsive font size */
+  color: #374151;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.legend-color.completed {
+  background-color: #22c55e;
+  border-color: #16a34a;
+}
+
+.legend-color.in-progress {
+  background-color: #eab308;
+  border-color: #ca8a04;
+}
+
+.legend-color.not-started {
+  background-color: #9ca3af;
+  border-color: #6b7280;
+}
+
+.visualization-wrapper {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  width: 100%;
+}
+
+.visualization-wrapper svg {
+  display: block;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 1000;
+  font-size: clamp(11px, 2.5vw, 14px); /* Responsive font size */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-width: min(250px, 80vw); /* Responsive max width */
+  backdrop-filter: blur(10px);
+}
+
+.tooltip-title {
+  font-weight: 600;
+  font-size: clamp(13px, 3vw, 16px); /* Responsive font size */
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+.tooltip-status {
+  margin-bottom: 3px;
+  color: #e5e7eb;
+}
+
+.tooltip-score {
+  margin-bottom: 6px;
+  color: #e5e7eb;
+}
+
+.tooltip-progress {
+  color: #fbbf24;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.tooltip-completed {
+  color: #34d399;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Node styles */
+.node {
+  transition: all 0.2s ease-in-out;
+}
+
+.node:hover {
+  filter: brightness(1.1);
+}
+
+.link {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .learning-path-container {
+    padding: 10px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .legend {
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .legend-item {
+    font-size: 12px;
+    gap: 4px;
+  }
+  
+  .legend-color {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .visualization-wrapper svg {
+    min-height: 350px;
+  }
+  
+  .tooltip {
+    font-size: 11px;
+    padding: 8px 10px;
+    max-width: min(200px, 85vw);
+  }
+  
+  .tooltip-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .learning-path-container {
+    padding: 8px;
+  }
+  
+  .header {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .legend {
+    gap: 8px;
+  }
+  
+  .legend-item {
+    font-size: 11px;
+  }
+  
+  .legend-color {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .visualization-wrapper svg {
+    min-height: 300px;
+  }
+  
+  .tooltip {
+    font-size: 10px;
+    padding: 6px 8px;
+    max-width: min(180px, 90vw);
+    border-radius: 6px;
+  }
+  
+  .tooltip-title {
+    font-size: 12px;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .node {
+    /* Larger tap targets on touch devices */
+    stroke-width: 4 !important;
+  }
+  
+  .tooltip {
+    /* More prominent tooltips on touch */
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .visualization-wrapper svg {
+    /* Ensure crisp rendering on high DPI screens */
+    shape-rendering: geometricPrecision;
+  }
+}
