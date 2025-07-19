@@ -73,19 +73,4 @@ Each node contains:
 - `score`: Achievement score (0-100)
 - `x`, `y`: Position coordinates for layout
 
-## Customization
 
-To customize the learning path data, modify the `learningPathData` object in `LearningPathVisualization.jsx`:
-
-```javascript
-const learningPathData = {
-  nodes: [
-    { id: 'topic1', title: 'Your Topic', status: 'Completed', score: 95, x: 100, y: 100 },
-    // Add more nodes...
-  ],
-  links: [
-    { source: 'topic1', target: 'topic2' },
-    // Add more connections...
-  ]
-};
-```
